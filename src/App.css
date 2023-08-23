@@ -1,0 +1,181 @@
+@font-face {
+   font-family: get schwifty;
+   src: url(./assets/fonts/get_schwifty.ttf);
+}
+
+@font-face {
+   font-family: Arcade Gamer;
+   src: url(./assets/fonts/ArcadeGamer.otf);
+}
+
+.App {
+   text-align: center;
+}
+
+/* NavBar */
+.pre-navbar{
+  display: flex;
+  background-color: rgb(124, 119, 119);
+  justify-content: flex-end;
+}
+
+.search-bar { /* We use here flexbox to align every tag inside main div tag */
+   display: flex;
+   align-items: center;
+   height: 65px;
+   background-color: #929292;
+   margin-top: 0px;
+   padding-top: 0px;
+   width: 550px;
+   justify-content: flex-end;
+   border-bottom-left-radius: 14px;
+   border-top-left-radius: 14px
+}
+
+/* onSearch, SearchBar */
+
+.input-nav {
+   width: 300px;
+   height: 40px;
+   border-radius: 4px;
+   border: 0px;
+   margin-right: 35px ;
+   padding: 10px 15px; /* Agrega espacio interno en los lados izquierdo y derecho */
+   border: 1px solid #ccc; /* Agrega un borde al input */
+   font-size: 16px; /* Tamaño de la fuente */
+   box-sizing: border-box;
+   outline:none;
+
+}
+
+.button-search{
+   margin-right: 20px;
+   width: 108px;
+   height: 40px;
+   border: 0px;
+   border-radius: 10px;
+   background: #ffff61;
+   /* font-family: 'get schwifty', sans-serif;
+   font-size: 14px; */
+   font-family: Arcade Gamer;
+   font-size: 17px;
+}
+
+.button-random{
+  display: flex;
+  margin-right: 20px;
+  width: 40px;
+  height: 40px;
+  border: 0px;
+  border-radius: 10px;
+  background: #ffff61;
+  /* font-family: 'get schwifty', sans-serif;
+  font-size: 14px; */
+  font-family: Arcade Gamer;
+  font-size: 24px;
+  justify-content: center;
+}
+
+.button-search:hover{
+   transform: scale(1.05);
+}
+
+
+/* Cards */
+
+.card-list {
+   margin-top: 10px;
+   /* display: flex; */
+   display: flex;
+   gap: 30px; 
+   flex-wrap: wrap;
+   justify-content: center;
+   align-items: flex-start;
+   margin-bottom: 15px;
+ }
+
+
+ /* Card */
+ 
+ .card {
+   position: relative;
+   width: 300px;
+   border: 0px solid #ccc;
+   box-shadow: 7px 7px 10px rgba(48, 48, 48, 0.8);
+   font-family: Arcade Gamer;
+   font-size: 17px;
+   font-weight: 600;
+ }
+ 
+ .close-button {
+   position: absolute;
+   top: 0px;
+   right: 0px;
+   background: rgb(243, 63, 63);
+   border: none;
+   font-size: 18px;
+   cursor: pointer;
+   font-family: Arcade Gamer;
+   height: 30px;
+ }
+ 
+ .img-container {
+   width: 100%;
+   max-height: 300px;
+   object-fit: cover;
+ }
+ 
+ .image-text {
+   position: absolute;
+   display: flex;
+   top: 75%;
+   left: 30%;
+   transform: translate(-50%, -50%);
+   background: #ffff61;
+   padding: 5px 10px;
+   width: 150px;
+   height: 30px;
+   border-radius: 4px;
+   align-items: center;
+   justify-content: center;
+ }
+
+ .image-text.expanded {
+    height: 110px;
+ }
+ 
+ .footer {
+   display: flex;
+   background-color: #929292;
+   padding: 10px;
+   border-radius: 0 0 0px 0px;
+   justify-content: space-around;
+   height: 50px;
+   align-items: center;
+   font-size: 19px;
+ }
+ 
+ .image-container {
+   /* position: relative; */
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+ }
+
+.left-content, .right-content {
+   flex: 1;
+   padding: 20px; 
+   border: 1px solid #434343;
+}
+
+.right-content {
+   border-top: 0px;
+   border-right: 0px;
+   border-bottom: 0px;
+}
+
+.left-content {
+   border-top: 0px;
+   border-bottom: 0px;
+   border-left: 0px;
+}

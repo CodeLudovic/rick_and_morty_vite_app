@@ -1,0 +1,6 @@
+.card-list {
+    display: flex; /* Utiliza flexbox para la disposición horizontal */
+    justify-content: center; /* Alinea horizontalmente al centro */
+    align-items: center; /* Alinea verticalmente al centro */
+    gap: 50px; /* Espaciado entre las cartas */
+  }
