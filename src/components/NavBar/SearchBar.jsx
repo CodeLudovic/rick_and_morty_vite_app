@@ -1,15 +1,11 @@
 import { useState } from "react";
 
-export default function SearchBar(props) {
-	const onRandom = props.onR;
-	const onSearch = props.onS;
+export default function SearchBar({ onSearch, onRandomize }) {
 	let [id, setID] = useState("");
 
 	function handleChange(event) {
 		setID(event.target.value);
 	}
-
-	//console.log(props);
 	return (
 		<div className="search-bar">
 			<input
@@ -19,7 +15,7 @@ export default function SearchBar(props) {
 				id="inp"
 				onChange={handleChange}
 			/>
-			<button className="button-random" onClick={() => onRandom()}>
+			<button className="button-random" onClick={() => onRandomize()}>
 				👀
 			</button>
 			<button className="button-search" onClick={() => onSearch(id)}>

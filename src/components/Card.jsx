@@ -1,16 +1,9 @@
 import { useState } from "react";
+import { NavLink } from "react-router-dom";
 
-function Card(props) {
-	console.log(props);
-	const onDestroy = props.func;
-	const item = props.item;
-
-	//console.log(item.id);
-
+function Card({ onClose, item }) {
 	const [inputValue, setInputValue] = useState("");
-
 	const maxLength = 25;
-
 	const handleInputChange = (event) => {
 		const newValue = event.target.value;
 		setInputValue(newValue);
@@ -18,7 +11,7 @@ function Card(props) {
 
 	return (
 		<div className="card">
-			<button className="close-button" onClick={() => onDestroy(item.id)}>
+			<button className="close-button" onClick={() => onClose(item.id)}>
 				X
 			</button>
 			<div className="image-container">
@@ -30,7 +23,9 @@ function Card(props) {
 				}`}
 				onChange={handleInputChange}
 				value={inputValue}>
-				{item.name}
+				<NavLink to={`/detail/${item.id}`} className="link-cards">
+					{item.name}
+				</NavLink>
 			</div>
 			<div className="footer">
 				<div className="left-content">{item.species}</div>

@@ -4,3 +4,14 @@
     background-color: grey;
     color: gray;
 }
+
+.active {
+    color: brown;
+    font-weight: bold;
+    text-decoration: none;
+  }
+  .disable {
+    color: #f6f4e6;
+    text-decoration: none;
+  }
+  
