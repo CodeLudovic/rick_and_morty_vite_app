@@ -1,24 +1,28 @@
-import React from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
-import { useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 function Detail() {
 	const [character, setCharacter] = useState({});
+	const nagivate = useNavigate();
 
 	const { id } = useParams(); //
 
-	React.useEffect(() => {
-		axios(`https://rickandmortyapi.com/api/character/${id}`).then(
-			({ data }) => {
+	useEffect(() => {
+		axios(`https://rickandmortyapi.com/api/character/${id}`)
+			.then(({ data }) => {
 				if (data.name) {
 					//console.log(origin);
 					setCharacter(data);
 				} else {
 					window.alert("No hay personajes con ese ID");
 				}
-			}
-		);
+			})
+			.catch((error) => {
+				if (error.response && error.response.status === 404) {
+					nagivate("/Error404");
+				}
+			});
 		return setCharacter({});
 	}, [id]);
 

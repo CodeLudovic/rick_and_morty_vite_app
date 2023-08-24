@@ -6,6 +6,7 @@ import About from "./components/About/About";
 import Detail from "./components/Detail/Detail";
 import NavBar from "./components/NavBar/NavBar";
 import Cards from "./components/Cards";
+import Error404 from "./components/error404/Error404";
 
 function App() {
 	const [characters, setCharacters] = useState([]);
@@ -72,6 +73,8 @@ function App() {
 		setCharacters([...result]);
 	}
 
+	console.log(characters);
+
 	return (
 		<div className="App">
 			<NavBar onSearch={onSearch} onRandomize={onRandomize} />
@@ -83,7 +86,10 @@ function App() {
 				/>
 				<Route path="/about" element={<About />} />
 				<Route path="/detail/:id" element={<Detail />} />
+				<Route path="/error404" element={<Error404 />} />
+				<Route path="*" element={<Error404 />}></Route>
 			</Routes>
+			<Cards />
 		</div>
 	);
 }
