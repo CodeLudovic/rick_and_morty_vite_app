@@ -84,6 +84,7 @@ function App() {
 					path="/home"
 					element={<Cards characters={characters} onClose={onClose} />}
 				/>
+				<Route path="/" element={<Cards />} />
 				<Route path="/about" element={<About />} />
 				<Route path="/detail/:id" element={<Detail />} />
 				<Route path="/error404" element={<Error404 />} />
