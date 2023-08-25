@@ -1,15 +1,36 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import "./App.css";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import About from "./components/About/About";
 import Detail from "./components/Detail/Detail";
 import NavBar from "./components/NavBar/NavBar";
 import Cards from "./components/Cards";
 import Error404 from "./components/error404/Error404";
+import Login from "./components/Login/Login";
 
 function App() {
+	/* eslint-disable */
+	let location = useLocation();
+	let nav = useNavigate();
+	const EMAIL = "danielospinar@gmail.com";
+	const PASS = "Dor943012";
+
 	const [characters, setCharacters] = useState([]);
+	const [access, setAccess] = useState(false);
+
+	useEffect(() => {
+		!access && nav("/");
+	}, [access]);
+
+	function login(userData) {
+		if (userData.email === EMAIL && userData.password === PASS) {
+			setAccess(true);
+			nav("/home");
+		}
+	}
+
+	console.log(access);
 	function lookUpForState(id) {
 		let bool = false;
 		for (let i = 0; i < characters.length; i++) {
@@ -73,18 +94,33 @@ function App() {
 		setCharacters([...result]);
 	}
 
-	console.log(characters);
-
+	function handlerSetAccess(access) {
+		setAccess(access);
+		nav("/");
+	}
+	//console.log(characters);
+	if (location.pathname === "/") {
+		return (
+			<div className="App2">
+				<Login login={login} acc={access} />
+			</div>
+		);
+	}
 	return (
 		<div className="App">
-			<NavBar onSearch={onSearch} onRandomize={onRandomize} />
-			{/* <Home characters={characters} onClosed={onClose} /> */}
+			<NavBar
+				onSearch={onSearch}
+				onRandomize={onRandomize}
+				access={handlerSetAccess}
+				acc={access}
+			/>
 			<Routes>
+				{/* <Home characters={characters} onClosed={onClose} /> */}
 				<Route
 					path="/home"
 					element={<Cards characters={characters} onClose={onClose} />}
 				/>
-				<Route path="/" element={<Cards />} />
+				<Route path="/" element={<Login login={login} access={access} />} />
 				<Route path="/about" element={<About />} />
 				<Route path="/detail/:id" element={<Detail />} />
 				<Route path="/error404" element={<Error404 />} />

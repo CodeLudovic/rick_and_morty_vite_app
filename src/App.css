@@ -19,6 +19,18 @@
    background-attachment: fixed; 
 }
 
+.App2 {
+   text-align: center;
+   display: flex;
+   flex-direction: column;
+   height: 100vh; 
+   background-image: url('./assets/bgram.jpg'); /* Cambia la ruta según tu ubicación de imagen */
+   background-size: cover; /* Ajusta la imagen para cubrir todo el fondo */
+   background-repeat: no-repeat;
+   background-attachment: fixed;
+   overflow: hidden;
+}
+
 /* NavBar */
 .pre-navbar{
   display: flex;
@@ -40,6 +52,7 @@
    margin-right: 116px;
 }
 
+
 /* onSearch, SearchBar */
 
 .input-nav {
@@ -53,7 +66,16 @@
    font-size: 16px; /* Tamaño de la fuente */
    box-sizing: border-box;
    outline:none;
+   
+}
 
+.input-nav:focus{
+   transform: scale(1.05);
+   display: inline-block;
+   box-shadow: 
+   0 0 10px cyan,  
+   0 0 20px magenta;
+   cursor: pointer;
 }
 
 .buttons-nav {
@@ -75,8 +97,18 @@
    font-size: 17px;
 }
 
+.button-search:hover{
+   transform: scale(1.05);
+   display: inline-block;
+   box-shadow: 
+   0 0 10px cyan,  
+   0 0 20px magenta;
+   cursor: pointer;
+}
+
 .button-home{
-   margin-right: 80px;
+   margin-left: 40px;
+   margin-right: 40px;
    width: 108px;
    height: 40px;
    border: 0px;
@@ -88,30 +120,14 @@
    font-size: 17px;
 }
 
-.button-about{
-   margin-right: 80px;
-   width: 108px;
-   height: 40px;
-   border: 0px;
-   border-radius: 10px;
-   background: #ffff61;
-   /* font-family: 'get schwifty', sans-serif;
-   font-size: 14px; */
-   font-family: Arcade Gamer;
-   font-size: 17px;
+.button-home:hover{
+   transform: scale(1.05);
+   display: inline-block;
+   box-shadow: 
+   0 0 10px cyan,  
+   0 0 20px magenta;
+   cursor: pointer;
 }
-
-.disable{
-   text-decoration: none;
-}
-
-.active{
-  color: brown;
-  font-weight: bold;
-  text-decoration: none;
-}
-
-
 
 .button-about{
    margin-right: 10px;
@@ -126,23 +142,71 @@
    font-size: 17px;
 }
 
-.button-random{
-  display: flex;
-  margin-right: 20px;
-  width: 40px;
-  height: 40px;
-  border: 0px;
-  border-radius: 10px;
-  background: #ffff61;
-  /* font-family: 'get schwifty', sans-serif;
-  font-size: 14px; */
-  font-family: Arcade Gamer;
-  font-size: 24px;
-  justify-content: center;
+.button-about:hover{
+   transform: scale(1.05);
+   display: inline-block;
+   box-shadow: 
+   0 0 10px cyan,  
+   0 0 20px magenta;
+   cursor: pointer;
+   border: 1px #434343 solid;
 }
 
-.button-search:hover{
+.button-random{
+   display: flex;
+   margin-right: 20px;
+   width: 40px;
+   height: 40px;
+   border: 0px;
+   border-radius: 10px;
+   background: #ffff61;
+   /* font-family: 'get schwifty', sans-serif;
+   font-size: 14px; */
+   font-family: Arcade Gamer;
+   font-size: 24px;
+   justify-content: center;
+}
+
+.button-random:hover{
    transform: scale(1.05);
+   box-shadow: 
+   0 0 10px cyan,  
+   0 0 20px magenta;
+   cursor: pointer;
+   border: 1px #434343 solid;
+}
+
+.disable{
+   text-decoration: none;
+}
+
+.active{
+  color: brown;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+
+.button-logout{
+   margin-right: 10px;
+   width: 108px;
+   height: 40px;
+   border: 0px;
+   border-radius: 10px;
+   background: #e77272;
+   /* font-family: 'get schwifty', sans-serif;
+   font-size: 14px; */
+   font-family: Arcade Gamer;
+   font-size: 17px;
+}
+
+.button-logout:hover{
+   transform: scale(1.05);
+   box-shadow: 
+   0 0 10px cyan,  
+   0 0 20px magenta;
+   cursor: pointer;
+   border: 1px #434343 solid;
 }
 
 
@@ -322,3 +386,97 @@
    color: white;
    font-size: 45px;
 }
+/* Login */
+
+.login-container {
+   /* display: flex;
+   flex: 1;
+   width: 300px;
+   height: 400px;
+   margin-left: 6px; */
+   display: flex;
+   justify-content: center;
+   font-size: 40px;
+   /* background-color: rgb(218, 97, 97); */
+   flex: 1; /* El contenido toma todo el espacio disponible */
+   overflow-y: hidden; /* Agrega scroll si el contenido es más largo que la ventana */
+   padding: 200px; /* O cualquier otro espacio de relleno que desees */
+   color: aliceblue;
+}
+
+.form-login{
+   padding-top: 1px;
+   width: 400px;
+   height: 550px;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   background-color: rgba(48, 48, 48, 0.7);
+   box-shadow: 
+   0 0 20px cyan,  
+   0 0 20px magenta,
+   0 0 40px magenta;
+   /* filter: blur(10px); */
+   border-radius: 20px;
+   
+}
+
+.form-inputs{
+   height: 30px;
+   border-radius: 10px;
+   /* padding-left: 30px; */
+   font-family: Arcade Gamer;
+   /* padding-right: 20px; */
+   width: 200px;
+   display: flex;
+   font-size: 15px;
+   text-align: center;
+   transition: box-shadow 0.5s;
+}
+
+.form-inputs:focus{
+   box-shadow: 
+   0 0 20px cyan,  
+   0 0 40px magenta;
+}
+
+.form-button{
+   margin-top: 30px;
+   height: 30px;
+   width: 100px;
+   font-family: Arcade Gamer;
+   background-color: #4ce61f;
+   border: 1px;
+   border-radius: 10px;
+   transition: box-shadow 0.5s;
+   border: 1px solid;
+}
+
+.form-button:hover{
+   display: inline-block;
+   box-shadow: 
+   0 0 20px cyan,  
+   0 0 40px magenta;
+   cursor: pointer;
+   transform: scale(1.05);
+}
+
+.form-email-label{
+   margin-top: 50px;
+}
+
+.form-image {
+   width: 150px;
+   border-radius: 50%;
+   box-shadow: 
+   0 0 20px cyan,  
+   0 0 40px magenta;
+}
+
+.form-danger{
+   padding-top: 10px;
+   color: rgb(241, 104, 104);
+   font-size: 15px;
+}
+

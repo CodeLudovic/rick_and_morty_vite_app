@@ -2,10 +2,23 @@ import SearchBar from "./SearchBar";
 import styleNav from "./NavBar.module.css";
 import { NavLink } from "react-router-dom";
 
-function NavBar({ onSearch, onRandomize }) {
+function NavBar({ onSearch, onRandomize, access, acc }) {
+	const handlerLogOut = () => {
+		access(false);
+	};
+
+	const onLogOut = () => {
+		handlerLogOut();
+	};
+
 	return (
 		<div className="pre-navbar">
 			<div className="buttons-nav">
+				{acc && (
+					<button className="button-logout" onClick={onLogOut}>
+						Log Out
+					</button>
+				)}
 				<NavLink
 					to={"/home"}
 					className={({ isActive }) =>

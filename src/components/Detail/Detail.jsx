@@ -2,6 +2,8 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 
+/* eslint-disable */
+
 function Detail() {
 	const [character, setCharacter] = useState({});
 	const nagivate = useNavigate();
