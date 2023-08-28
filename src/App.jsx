@@ -40,6 +40,7 @@ function App() {
 		}
 		return bool;
 	}
+
 	function onRandomize(id = 0) {
 		id = Math.floor(Math.random() * 826) + 1;
 		const rid = id.toString();
