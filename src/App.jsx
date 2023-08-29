@@ -8,6 +8,7 @@ import NavBar from "./components/NavBar/NavBar";
 import Cards from "./components/Cards";
 import Error404 from "./components/error404/Error404";
 import Login from "./components/Login/Login";
+import Favorites from "./components/Favorites/Favorites";
 
 function App() {
 	/* eslint-disable */
@@ -122,10 +123,11 @@ function App() {
 					element={<Cards characters={characters} onClose={onClose} />}
 				/>
 				<Route path="/" element={<Login login={login} access={access} />} />
+				<Route path="/favorites" element={<Favorites onClose={onClose} />} />
 				<Route path="/about" element={<About />} />
 				<Route path="/detail/:id" element={<Detail />} />
 				<Route path="/error404" element={<Error404 />} />
-				<Route path="*" element={<Error404 />}></Route>
+				<Route path="*" element={<Error404 />} />
 			</Routes>
 			<Cards />
 		</div>
