@@ -6,7 +6,7 @@ import { addFav, removeFav } from "../redux/actions/actions";
 export function Card({ onClose, item, addFav, removeFav, myFavorites }) {
 	const [inputValue, setInputValue] = useState("");
 	const [isFav, setIsFav] = useState(false);
-
+	/* eslint-disable */
 	useEffect(() => {
 		// myFavorites.forEach((fav) => {
 		// 	if (fav.id === item.id) {

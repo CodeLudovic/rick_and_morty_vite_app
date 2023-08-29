@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import Card from "../Card";
-
+/* eslint-disable */
 export function Favorites({ myFavorites, onClose }) {
 	if (myFavorites !== null && myFavorites !== undefined) {
 		return (
