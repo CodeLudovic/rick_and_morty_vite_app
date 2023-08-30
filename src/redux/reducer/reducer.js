@@ -13,6 +13,7 @@ export const rootReducer = (state = initialState, action) => {
 				allCharacters: [...state.myFavorites, action.payload],
 				myFavorites: [...state.myFavorites, action.payload],
 			};
+
 		case REMOVE_FAV:
 			const respon = state.myFavorites.filter(
 				(character) => character.id !== parseInt(action.payload)
@@ -21,36 +22,46 @@ export const rootReducer = (state = initialState, action) => {
 				...state,
 				myFavorites: respon,
 			};
+
 		case FILTER:
-			let copy = [...state.allCharacters];
-			const result = copy.filter(
-				(character) => character.gender === action.payload
-			);
-			return {
-				...state,
-				myFavorites: [...result],
-			};
+			if (action.payload !== "All") {
+				let copy = [...state.allCharacters];
+				const result = copy.filter(
+					(character) => character.gender === action.payload
+				);
+				return {
+					...state,
+					myFavorites: [...result],
+				};
+			} else {
+				return {
+					...state,
+					myFavorites: [...state.allCharacters],
+				};
+			}
+
 		case ORDER:
 			if (action.payload === "A") {
-				const copy2 = [...state.allCharacters];
+				const copy2 = state.myFavorites;
 				const result = copy2.sort((a, b) => a.id - b.id);
 				return {
 					...state,
-					myFavorites: result,
+					myFavorites: [...result],
 				};
 			}
+
 			if (action.payload === "D") {
-				const copy2 = [...state.allCharacters];
+				const copy2 = state.myFavorites;
 				const result = copy2.sort((a, b) => b.id - a.id);
 				return {
 					...state,
-					myFavorites: result,
+					myFavorites: [...result],
 				};
 			}
 
 		// TODO Agregar opcion de agregar personaje para centralizar todos mis estados,
 		// tambien agregar action de borrar y agregar personaje random.
 		default:
-			return state;
+			return { ...state };
 	}
 };

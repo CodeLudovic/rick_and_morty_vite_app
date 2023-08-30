@@ -9,17 +9,22 @@ import Cards from "./components/Cards";
 import Error404 from "./components/error404/Error404";
 import Login from "./components/Login/Login";
 import Favorites from "./components/Favorites/Favorites";
-import { connect } from "react-redux";
+import { connect, useDispatch, useSelector } from "react-redux";
+import { removeFav } from "./redux/actions/actions";
 
 function App() {
 	/* eslint-disable */
 	let location = useLocation();
 	let nav = useNavigate();
+	const dispatch = useDispatch();
+
 	const EMAIL = "danielospinar@gmail.com";
 	const PASS = "Dor943012";
 
 	const [characters, setCharacters] = useState([]);
 	const [access, setAccess] = useState(false);
+
+	const favs = useSelector((state) => state.myFavorites);
 
 	useEffect(() => {
 		!access && nav("/");
@@ -90,10 +95,15 @@ function App() {
 	}
 
 	function onClose(id) {
+		// event.preventDefault();
 		const result = characters.filter((character) => {
 			return character.id !== parseInt(id);
 		});
-
+		favs?.map((favo) => {
+			if (favo.id === id) {
+				dispatch(removeFav(id));
+			}
+		});
 		setCharacters([...result]);
 	}
 
@@ -117,7 +127,7 @@ function App() {
 		);
 	}
 	return (
-		<div className="App">
+		<div className="App portal">
 			<NavBar
 				onSearch={onSearch}
 				onRandomize={onRandomize}

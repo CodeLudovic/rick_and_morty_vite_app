@@ -19,23 +19,35 @@ export function Favorites({ myFavorites, onClose, onCloseFav }) {
 		e.preventDefault();
 		dispatch(filterCards(e.target.value));
 	}
+	const optFilter = ["All", "Male", "Female", "Genderless", "unknown"];
+	const optOrder = ["A", "D"];
 
 	if (myFavorites !== null && myFavorites !== undefined) {
 		return (
 			<>
 				<div className="order-bar">
 					<div>
-						<select className="option-bar" onChange={handlerOrder}>
-							<option value="A">Ascendente</option>
-							<option value="D">Descendente</option>
+						<select
+							placeholder="Order by.."
+							className="option-bar"
+							onChange={handlerOrder}>
+							{optOrder.map((order, index) => (
+								<option key={index} value={order}>
+									{order === "A" ? "Ascendente" : "Descendente"}
+								</option>
+							))}
 						</select>
 					</div>
 					<div>
-						<select className="" onChange={handlerFilter}>
-							<option value="Male">Male</option>
-							<option value="Female">Female</option>
-							<option value="Genderless">Genderless</option>
-							<option value="unknown">Unknown</option>
+						<select
+							placeholder="Filter by..."
+							className=""
+							onChange={handlerFilter}>
+							{optFilter.map((filter, index) => (
+								<option key={index} value={filter}>
+									{filter === "unknown" ? "Unknown" : filter}
+								</option>
+							))}
 						</select>
 					</div>
 				</div>
