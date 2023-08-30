@@ -3,12 +3,10 @@ import Card from "../Card";
 import { useDispatch } from "react-redux";
 import { filterCards, orderCards } from "../../redux/actions/actions";
 /* eslint-disable */
-export function Favorites({ myFavorites, onClose, onCloseFav }) {
+export function Favorites({ myFavorites, onClose }) {
 	const dispatch = useDispatch();
 	const selector1 = useSelector((state) => state.myFavorites);
 	const selector2 = useSelector((state) => state.allCharacters);
-	console.log(selector1);
-	console.log(selector2);
 
 	function handlerOrder(e) {
 		e.preventDefault();

@@ -12,8 +12,8 @@ import Favorites from "./components/Favorites/Favorites";
 import { connect, useDispatch, useSelector } from "react-redux";
 import { removeFav } from "./redux/actions/actions";
 
+/* eslint-disable */
 function App() {
-	/* eslint-disable */
 	let location = useLocation();
 	let nav = useNavigate();
 	const dispatch = useDispatch();

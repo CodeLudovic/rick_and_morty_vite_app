@@ -38,14 +38,14 @@ export function Card({ onClose, item, addFav, removeFav, myFavorites }) {
 		}
 	};
 
-	const handleCloseFav = () => {
-		if (isFav === true) {
-			setIsFav(false);
-			removeFav(item.id);
-		}
-	};
-
+	// const handleCloseFav = () => {
+	// 	if (isFav === true) {
+	// 		setIsFav(false);
+	// 		removeFav(item.id);
+	// 	}
+	// };
 	//console.log(myFavorites);
+
 	return (
 		<div className="card">
 			{isFav ? (
