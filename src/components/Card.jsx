@@ -3,18 +3,10 @@ import { useState, useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { addFav, removeFav } from "../redux/actions/actions";
 
-export function Card({
-	onClose,
-	item,
-	addFav,
-	removeFav,
-	myFavorites,
-	myFavorite,
-}) {
+export function Card({ onClose, item, addFav, removeFav, myFavorites }) {
 	const [inputValue, setInputValue] = useState("");
 	const [isFav, setIsFav] = useState(false);
 	let loc = useLocation();
-	console.log(myFavorite);
 	/* eslint-disable */
 	useEffect(() => {
 		// myFavorites.forEach((fav) => {

@@ -17,6 +17,7 @@
    background-size: cover; /* Ajusta la imagen para cubrir todo el fondo */
    background-repeat: no-repeat;
    background-attachment: fixed; 
+   overflow-y: hidden;
 }
 
 .App2 {
@@ -51,10 +52,7 @@
    border-radius: 14px;
    margin-right: 116px;
 }
-
-
 /* onSearch, SearchBar */
-
 .input-nav {
    width: 300px;
    height: 40px;
@@ -65,10 +63,8 @@
    border: 1px solid #ccc; /* Agrega un borde al input */
    font-size: 16px; /* Tamaño de la fuente */
    box-sizing: border-box;
-   outline:none;
-   
+   outline:none;  
 }
-
 .input-nav:focus{
    transform: scale(1.05);
    display: inline-block;
@@ -95,6 +91,7 @@
    font-size: 14px; */
    font-family: Arcade Gamer;
    font-size: 17px;
+   transition: box-shadow 0.5s;
 }
 
 .button-search:hover{
@@ -540,5 +537,20 @@
    padding-top: 10px;
    color: rgb(241, 104, 104);
    font-size: 15px;
+}
+
+/* Favorites */
+
+.order-bar {
+   display: flex;
+   height: 5vh;
+   background: rgba(48, 48, 48, 0.4);
+   justify-content: space-evenly;
+   align-items: center;
+}
+
+
+.option-bar{
+
 }
 
