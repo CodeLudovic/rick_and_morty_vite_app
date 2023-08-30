@@ -17,6 +17,9 @@ export const rootReducer = (state = initialState, action) => {
 			return {
 				myFavorites: respon,
 			};
+
+		// TODO Agregar opcion de agregar personaje para centralizar todos mis estados,
+		// tambien agregar action de borrar y agregar personaje random.
 		default:
 			return state;
 	}

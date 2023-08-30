@@ -9,6 +9,7 @@ import Cards from "./components/Cards";
 import Error404 from "./components/error404/Error404";
 import Login from "./components/Login/Login";
 import Favorites from "./components/Favorites/Favorites";
+import { connect } from "react-redux";
 
 function App() {
 	/* eslint-disable */
@@ -31,7 +32,7 @@ function App() {
 		}
 	}
 
-	console.log(access);
+	//console.log(access);
 	function lookUpForState(id) {
 		let bool = false;
 		for (let i = 0; i < characters.length; i++) {
@@ -92,9 +93,16 @@ function App() {
 		const result = characters.filter((character) => {
 			return character.id !== parseInt(id);
 		});
-		console.log(result);
+
 		setCharacters([...result]);
 	}
+
+	// function onCloseFav(id) {
+	// 	const result2 = favorit.filter((character) => {
+	// 		return character.id !== parseInt(id);
+	// 	});
+	// 	setFavorite([...result2]);
+	// }
 
 	function handlerSetAccess(access) {
 		setAccess(access);
@@ -134,4 +142,10 @@ function App() {
 	);
 }
 
-export default App;
+export function mapStateToProps(state) {
+	return {
+		myFavorites: state.myFavorites,
+	};
+}
+
+export default connect(mapStateToProps, null)(App);

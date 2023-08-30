@@ -1,11 +1,20 @@
 import { connect } from "react-redux";
 import { useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { addFav, removeFav } from "../redux/actions/actions";
 
-export function Card({ onClose, item, addFav, removeFav, myFavorites }) {
+export function Card({
+	onClose,
+	item,
+	addFav,
+	removeFav,
+	myFavorites,
+	myFavorite,
+}) {
 	const [inputValue, setInputValue] = useState("");
 	const [isFav, setIsFav] = useState(false);
+	let loc = useLocation();
+	console.log(myFavorite);
 	/* eslint-disable */
 	useEffect(() => {
 		// myFavorites.forEach((fav) => {
@@ -37,7 +46,14 @@ export function Card({ onClose, item, addFav, removeFav, myFavorites }) {
 		}
 	};
 
-	console.log(myFavorites);
+	const handleCloseFav = () => {
+		if (isFav === true) {
+			setIsFav(false);
+			removeFav(item.id);
+		}
+	};
+
+	//console.log(myFavorites);
 	return (
 		<div className="card">
 			{isFav ? (
@@ -49,9 +65,19 @@ export function Card({ onClose, item, addFav, removeFav, myFavorites }) {
 					🤍
 				</button>
 			)}
+			{loc.pathname === "/favorites" ? (
+				<button className="close-button" onClick={handleCloseFav}>
+					X
+				</button>
+			) : (
+				<button className="close-button" onClick={() => onClose(item.id)}>
+					X
+				</button>
+			)}
+			{/* 
 			<button className="close-button" onClick={() => onClose(item.id)}>
 				X
-			</button>
+			</button> */}
 			<div className="image-container">
 				<img src={item.image} alt="" />
 			</div>
