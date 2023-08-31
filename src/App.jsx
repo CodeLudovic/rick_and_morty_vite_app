@@ -9,7 +9,7 @@ import Cards from "./components/Cards";
 import Error404 from "./components/error404/Error404";
 import Login from "./components/Login/Login";
 import Favorites from "./components/Favorites/Favorites";
-import { connect, useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { removeFav } from "./redux/actions/actions";
 
 /* eslint-disable */
@@ -121,13 +121,13 @@ function App() {
 	//console.log(characters);
 	if (location.pathname === "/") {
 		return (
-			<div className="App2">
+			<div className="App">
 				<Login login={login} acc={access} />
 			</div>
 		);
 	}
 	return (
-		<div className="App portal">
+		<div className="App">
 			<NavBar
 				onSearch={onSearch}
 				onRandomize={onRandomize}
@@ -152,10 +152,4 @@ function App() {
 	);
 }
 
-export function mapStateToProps(state) {
-	return {
-		myFavorites: state.myFavorites,
-	};
-}
-
-export default connect(mapStateToProps, null)(App);
+export default App;

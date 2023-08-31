@@ -418,6 +418,10 @@
     /* justify-content: space-around; */
 }
 
+.detail-content img{
+   width:600px;
+}
+
 .detail-image {
    display: flex;
    width: 600px;
@@ -464,10 +468,10 @@
 }
 
 .form-login{
+   display: flex;
    padding-top: 1px;
    width: 400px;
-   height: 550px;
-   display: flex;
+   height: 610px;
    flex-direction: column;
    align-items: center;
    justify-content: center;
@@ -526,7 +530,7 @@
 }
 
 .form-image {
-   width: 150px;
+   width: 200px;
    border-radius: 50%;
    box-shadow: 
    0 0 20px cyan,  
@@ -550,217 +554,47 @@
 }
 
 /* Extra small devices (phones, 600px and down) */
-@media only screen and (max-width: 600px) {
-   
-   .pre-navbar{
-      width: 600px;
-      background-color: rgb(124, 119, 119);
-      justify-content: space-between;
-    
-    }
-    
-    .search-bar { /* We use here flexbox to align every tag inside main div tag */
-       display: flex;
-       align-items: center;
-       height: 65px;
-       background-color: #929292;
-       margin-top: 0px;
-       padding-top: 0px;
-       width: 550px;
-       justify-content: flex-end;
-       border-radius: 14px;
-       margin-right: 116px;
-    }
-    /* onSearch, SearchBar */
-    .input-nav {
-       width: 300px;
-       height: 40px;
-       border-radius: 4px;
-       border: 0px;
-       margin-right: 35px ;
-       padding: 10px 15px; /* Agrega espacio interno en los lados izquierdo y derecho */
-       border: 1px solid #ccc; /* Agrega un borde al input */
-       font-size: 16px; /* Tamaño de la fuente */
-       box-sizing: border-box;
-       outline:none;  
-    }
-    .input-nav:focus{
-       transform: scale(1.05);
-       display: inline-block;
-       box-shadow: 
-       0 0 10px cyan,  
-       0 0 20px magenta;
-       cursor: pointer;
-    }
-    
-    .buttons-nav {
-       display: flex;
-       align-items: center;
-       margin-left: 177px;
-    }
-    
-    .button-search{
-       margin-right: 20px;
-       width: 108px;
-       height: 40px;
-       border: 0px;
-       border-radius: 10px;
-       background: #ffff61;
-       /* font-family: 'get schwifty', sans-serif;
-       font-size: 14px; */
-       font-family: Arcade Gamer;
-       font-size: 17px;
-       transition: box-shadow 0.5s;
-    }
-    
-    .button-search:hover{
-       transform: scale(1.05);
-       display: inline-block;
-       box-shadow: 
-       0 0 10px cyan,  
-       0 0 20px magenta;
-       cursor: pointer;
-    }
-    
-    .button-home{
-       margin-left: 74px;
-       /* margin-right: 40px; */
-       width: 108px;
-       height: 40px;
-       border: 0px;
-       border-radius: 10px;
-       background: #ffff61;
-       /* font-family: 'get schwifty', sans-serif;
-       font-size: 14px; */
-       font-family: Arcade Gamer;
-       font-size: 17px;
-    }
-    
-    /* .active {
-       background-color: brown;
-       font-weight: bold;
-       text-decoration: none;
-     }
-     .disable {
-       background-color: #f6f4e6;
-       text-decoration: none;
-     } */
-    
-    .button-home:hover{
-       transform: scale(1.05);
-       display: inline-block;
-       box-shadow: 
-       0 0 10px cyan,  
-       0 0 20px magenta;
-       border: 1px black solid;
-       cursor: pointer;
-    }
-    
-    .button-about{
-       margin-right: 9px;
-       margin-left: 10px;
-       width: 108px;
-       height: 40px;
-       border: 0px;
-       border-radius: 10px;
-       background: #ffff61;
-       /* font-family: 'get schwifty', sans-serif;
-       font-size: 14px; */
-       font-family: Arcade Gamer;
-       font-size: 17px;
-    }
-    
-    .button-about:hover{
-       transform: scale(1.05);
-       display: inline-block;
-       box-shadow: 
-       0 0 10px cyan,  
-       0 0 20px magenta;
-       cursor: pointer;
-       border: 1px #434343 solid;
-    }
-    
-    .button-favorite{
-       margin-right: 10px;
-       width: 108px;
-       height: 40px;
-       border: 0px;
-       border-radius: 10px;
-       background: #ffff61;
-       /* font-family: 'get schwifty', sans-serif;
-       font-size: 14px; */
-       font-family: Arcade Gamer;
-       font-size: 17px;
-    }
-    
-    .button-favorite:hover{
-       transform: scale(1.05);
-       display: inline-block;
-       box-shadow: 
-       0 0 10px cyan,  
-       0 0 20px magenta;
-       cursor: pointer;
-       border: 1px #434343 solid;
-    }
-    
-    .button-random{
-       display: flex;
-       margin-right: 20px;
-       width: 40px;
-       height: 40px;
-       border: 0px;
-       border-radius: 10px;
-       background: #ffff61;
-       /* font-family: 'get schwifty', sans-serif;
-       font-size: 14px; */
-       font-family: Arcade Gamer;
-       font-size: 24px;
-       justify-content: center;
-    }
-    
-    .button-random:hover{
-       transform: scale(1.05);
-       box-shadow: 
-       0 0 10px cyan,  
-       0 0 20px magenta;
-       cursor: pointer;
-       border: 1px #434343 solid;
-    }
-    
-    .button-logout{
-       margin-right: 10px;
-       width: 108px;
-       height: 40px;
-       border: 0px;
-       border-radius: 10px;
-       background: #e77272;
-       /* font-family: 'get schwifty', sans-serif;
-       font-size: 14px; */
-       font-family: Arcade Gamer;
-       font-size: 17px;
-    }
-    
-    .button-logout:hover{
-       transform: scale(1.05);
-       box-shadow: 
-       0 0 10px cyan,  
-       0 0 20px magenta;
-       cursor: pointer;
-       border: 1px #434343 solid;
-    }
-    
+@media (max-width: 768px) {
+
+   .detail-content{
+      display: flex;
+      font-size: 20px;
+      color: aliceblue;
+      flex-direction: column;
+   }
+
+   .detail-image {
+      display: flex;
+      border-radius: 100px;
+      width: 0px;
+  }
+
+   .content-info-detail {
+      background-color: rgba(48, 48, 48, 0.4);
+      width: 500px;
+      padding: 0px;
+  }
+
+  .detail-content img{
+   display: flex;
+   width:300px;
+   height: 300px;
+   margin-left: 0px;
+   padding-left: 0px;
+
 }
 
-@media (max-width: 768px) {
    .search-bar {
-     width: 100%; /* Adjust width for smaller screens */
-     margin-right: 0; /* Remove right margin for smaller screens */
+     width: 100%; 
+      /* Remove right margin for smaller screens */
      justify-content: center; /* Center content for smaller screens */
+     margin-right: 0
    }
  
    .input-nav {
-     width: 100px; /* Adjust width for smaller screens */
-     margin-right: 0; /* Remove right margin for smaller screens */
+     width: 90px; /* Adjust width for smaller screens */
+     margin-left: 10px;
+     margin-right: 0px; /* Remove right margin for smaller screens */
    }
  
    .buttons-nav {
@@ -770,7 +604,6 @@
    .button-home,
    .button-about,
    .button-favorite,
-   .button-random,
    .button-logout {
      width: 50px; /* Adjust button width for smaller screens */
      font-size: 14px; /* Adjust font size for smaller screens */
@@ -782,31 +615,90 @@
 
    .button-favorite{
       font-size: 12px;
-      width: 80px
+      width: 70px
    }
 
    .button-home {
       margin-left: 0px;
    }
- 
-   /* Adjust other styles as needed for smaller screens */
- }
- 
- /* Add breakpoints for mobile */
- @media (max-width: 480px) {
-   .button-search,
-   .button-home,
-   .button-about,
-   .button-favorite,
-   .button-random,
-   .button-logout {
-     width: 90px; /* Adjust button width for smaller screens */
-     font-size: 14px; /* Adjust font size for smaller screens */
+
+   .button-search{
+      margin-right: 10px;
+      width: 60px;
+      font-size: 12px;
    }
- 
-   .card-list {
-     gap: 15px; /* Reduce gap between cards for smaller screens */
+
+   .button-random{
+      margin-right: 10px;
+      margin-left: 10px;
    }
- 
-   /* Adjust other styles as needed for even smaller screens */
- }
+
+   .App {
+      height: 100vh; 
+      background-image: url('./assets/bgram.jpg'); /* Cambia la ruta según tu ubicación de imagen */
+      background-size: cover; 
+      background-repeat: no-repeat;
+      background-position: center center;
+      overflow-y: hidden;
+   }
+
+   .form-login{
+      /* padding-top: 1px; */
+      width:450px;
+      /* flex-direction: column;
+      align-items: center;
+      justify-content: center; */
+      background-color: rgba(48, 48, 48, 0.7);
+      box-shadow: 
+      0 0 20px cyan,  
+      0 0 20px magenta,
+      0 0 40px magenta;
+      /* filter: blur(10px); */
+      border-radius: 20px;
+   }
+
+   .login-container {
+      display: flex;
+      padding-left: 50px;
+      padding-right: 50px;
+      justify-content: center;
+      font-size: 40px;
+      /* background-color: rgb(218, 97, 97); */
+      flex: 1;
+      overflow-y: hidden; /* Agrega scroll si el contenido es más largo que la ventana */ /* O cualquier otro espacio de relleno que desees */
+      color: aliceblue;
+   }
+   .form-inputs{
+      height: 30px;
+      border-radius: 10px;
+      /* padding-left: 30px; */
+      font-family: Arcade Gamer;
+      /* padding-right: 20px; */
+      margin-left: 20px;
+      margin-right: 20px;
+      width: 300px;
+      font-size: 15px;
+      transition: box-shadow 0.5s;
+   }
+
+      /* Adjust other styles as needed for smaller screens */
+   }
+   
+   /* Add breakpoints for mobile */
+   @media (max-width: 480px) {
+      .button-search,
+      .button-home,
+      .button-about,
+      .button-favorite,
+      .button-random,
+      .button-logout {
+      width: 90px; /* Adjust button width for smaller screens */
+      font-size: 14px; /* Adjust font size for smaller screens */
+      }
+   
+      .card-list {
+      gap: 15px; /* Reduce gap between cards for smaller screens */
+      }
+   
+      /* Adjust other styles as needed for even smaller screens */
+   }

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import myImage from "../../assets/img/rick-and-morty-6344804_1280.png";
 import { validate } from "../../helpers/validation";
+import "../../App.css";
 /* eslint-disable */
 function Login({ login, access }) {
 	//console.log(login);

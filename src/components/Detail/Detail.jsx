@@ -47,11 +47,7 @@ function Detail() {
 			)}
 			<div className="detail-image">
 				{character.image && (
-					<img
-						src={character.image}
-						width="600px"
-						style={{ borderRadius: "50%" }}
-					/>
+					<img src={character.image} style={{ borderRadius: "50%" }} />
 				)}
 			</div>
 		</div>
