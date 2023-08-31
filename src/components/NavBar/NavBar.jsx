@@ -1,6 +1,6 @@
 import SearchBar from "./SearchBar";
-// import styleNav from "./NavBar.module.css";
 import { NavLink } from "react-router-dom";
+import { ABOUT, FAVORITES, HOME } from "../../helpers/routing";
 
 function NavBar({ onSearch, onRandomize, access, acc }) {
 	const handlerLogOut = () => {
@@ -19,13 +19,13 @@ function NavBar({ onSearch, onRandomize, access, acc }) {
 						Log Out
 					</button>
 				)}
-				<NavLink to={"/home"}>
+				<NavLink to={HOME}>
 					<button className="button-home">Home</button>
 				</NavLink>
-				<NavLink to={"/about"}>
+				<NavLink to={ABOUT}>
 					<button className="button-about">About</button>
 				</NavLink>
-				<NavLink to={"/favorites"}>
+				<NavLink to={FAVORITES}>
 					<button className="button-favorite">Favorites</button>
 				</NavLink>
 			</div>
@@ -37,5 +37,3 @@ function NavBar({ onSearch, onRandomize, access, acc }) {
 }
 
 export default NavBar;
-
-// {({ isActive }) =>isActive ? "button-home active" : "button-home"}

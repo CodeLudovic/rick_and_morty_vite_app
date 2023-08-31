@@ -18,9 +18,13 @@ export const rootReducer = (state = initialState, action) => {
 			const respon = state.myFavorites.filter(
 				(character) => character.id !== parseInt(action.payload)
 			);
+			const respon2 = state.allCharacters.filter(
+				(character) => character.id !== parseInt(action.payload)
+			);
 			return {
 				...state,
 				myFavorites: respon,
+				allCharacters: respon2,
 			};
 
 		case FILTER:
@@ -58,9 +62,6 @@ export const rootReducer = (state = initialState, action) => {
 					myFavorites: [...result],
 				};
 			}
-
-		// TODO Agregar opcion de agregar personaje para centralizar todos mis estados,
-		// tambien agregar action de borrar y agregar personaje random.
 		default:
 			return { ...state };
 	}

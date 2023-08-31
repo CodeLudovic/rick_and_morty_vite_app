@@ -3,9 +3,7 @@ import myImage from "../../assets/img/rick-and-morty-6344804_1280.png";
 import { validate } from "../../helpers/validation";
 import "../../App.css";
 /* eslint-disable */
-function Login({ login, access }) {
-	//console.log(login);
-
+function Login({ login }) {
 	const [errors, setErrors] = useState({});
 	const [userData, setUserData] = useState({
 		email: "",
@@ -27,8 +25,6 @@ function Login({ login, access }) {
 		event.preventDefault();
 		login(userData);
 	}
-	//console.log(access);
-	console.log(errors);
 	return (
 		<div className="login-container">
 			<form className="form-login" onSubmit={handleSubmit}>

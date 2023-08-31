@@ -1,18 +1,17 @@
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { addFav, removeFav } from "../redux/actions/actions";
+import { MAXLENGTH } from "../helpers/data";
 
-export function Card({ onClose, item, addFav, removeFav, myFavorites }) {
+export function Card({ onClose, item }) {
 	const [inputValue, setInputValue] = useState("");
 	const [isFav, setIsFav] = useState(false);
+	const dispatch = useDispatch();
+	const myFavorites = useSelector((state) => state.myFavorites);
+
 	/* eslint-disable */
 	useEffect(() => {
-		// myFavorites.forEach((fav) => {
-		// 	if (fav.id === item.id) {
-		// 		setIsFav(true);
-		// 	}
-		// });
 		for (let i = 0; i < myFavorites.length; i++) {
 			if (myFavorites[i].id === item.id) {
 				setIsFav(true);
@@ -20,7 +19,6 @@ export function Card({ onClose, item, addFav, removeFav, myFavorites }) {
 		}
 	}, [myFavorites, item]);
 
-	const maxLength = 25;
 	const handleInputChange = (event) => {
 		const newValue = event.target.value;
 		setInputValue(newValue);
@@ -30,22 +28,13 @@ export function Card({ onClose, item, addFav, removeFav, myFavorites }) {
 		e.preventDefault();
 		if (isFav === true) {
 			setIsFav(false);
-			removeFav(item.id);
+			dispatch(removeFav(item.id));
 		}
 		if (isFav === false) {
 			setIsFav(true);
-			addFav(item);
+			dispatch(addFav(item));
 		}
 	};
-
-	// const handleCloseFav = () => {
-	// 	if (isFav === true) {
-	// 		setIsFav(false);
-	// 		removeFav(item.id);
-	// 	}
-	// };
-	//console.log(myFavorites);
-
 	return (
 		<div className="card">
 			{isFav ? (
@@ -65,22 +54,12 @@ export function Card({ onClose, item, addFav, removeFav, myFavorites }) {
 				}}>
 				X
 			</button>
-			{/* {loc.pathname === "/favorites" ? (
-				<button className="close-button" onClick={handleCloseFav}>
-					X
-				</button>
-			) : (
-			)} */}
-			{/* 
-			<button className="close-button" onClick={() => onClose(item.id)}>
-				X
-			</button> */}
 			<div className="image-container">
 				<img src={item.image} alt="" />
 			</div>
 			<div
 				className={`image-text ${
-					inputValue.length > maxLength ? "expanded" : ""
+					item.name.length > MAXLENGTH ? "expanded" : ""
 				}`}
 				onChange={handleInputChange}
 				value={inputValue}>
@@ -96,18 +75,4 @@ export function Card({ onClose, item, addFav, removeFav, myFavorites }) {
 	);
 }
 
-/* eslint-disable */
-export function mapDispatchToProps(dispatch) {
-	return {
-		addFav: (character) => dispatch(addFav(character)),
-		removeFav: (id) => dispatch(removeFav(id)),
-	};
-}
-
-export function mapStateToProps(state) {
-	return {
-		myFavorites: state.myFavorites,
-	};
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Card);
+export default Card;

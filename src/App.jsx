@@ -1,7 +1,10 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
-import "./App.css";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { removeFav } from "./redux/actions/actions";
+import axios from "axios";
+
+import "./App.css";
 import About from "./components/About/About";
 import Detail from "./components/Detail/Detail";
 import NavBar from "./components/NavBar/NavBar";
@@ -9,21 +12,25 @@ import Cards from "./components/Cards";
 import Error404 from "./components/error404/Error404";
 import Login from "./components/Login/Login";
 import Favorites from "./components/Favorites/Favorites";
-import { useDispatch, useSelector } from "react-redux";
-import { removeFav } from "./redux/actions/actions";
+import { lookUpForState } from "./helpers/validation";
+import { BASEURL, APIKEY, EMAIL, PASS } from "./helpers/data";
+import {
+	DETAILID,
+	FAVORITES,
+	BASE_URL,
+	DEFAULT,
+	ABOUT,
+	ERROR404,
+	HOME,
+} from "./helpers/routing";
 
 /* eslint-disable */
 function App() {
-	let location = useLocation();
-	let nav = useNavigate();
+	const location = useLocation();
+	const nav = useNavigate();
 	const dispatch = useDispatch();
-
-	const EMAIL = "danielospinar@gmail.com";
-	const PASS = "Dor943012";
-
 	const [characters, setCharacters] = useState([]);
 	const [access, setAccess] = useState(false);
-
 	const favs = useSelector((state) => state.myFavorites);
 
 	useEffect(() => {
@@ -37,23 +44,12 @@ function App() {
 		}
 	}
 
-	//console.log(access);
-	function lookUpForState(id) {
-		let bool = false;
-		for (let i = 0; i < characters.length; i++) {
-			if (characters[i].id === parseInt(id)) {
-				bool = true;
-			}
-		}
-		return bool;
-	}
-
 	function onRandomize(id = 0) {
 		id = Math.floor(Math.random() * 826) + 1;
 		const rid = id.toString();
-		axios(`https://rickandmortyapi.com/api/character/${rid}`)
+		axios(`${BASEURL}${id}${APIKEY}`)
 			.then(({ data }) => {
-				if (!lookUpForState(rid)) {
+				if (!lookUpForState(rid, characters)) {
 					if (data.name) {
 						setCharacters((oldChars) => [...oldChars, data]);
 					} else {
@@ -71,11 +67,10 @@ function App() {
 				}
 			});
 	}
-
 	function onSearch(id) {
-		axios(`https://rickandmortyapi.com/api/character/${id}`)
+		axios(`${BASEURL}${id}${APIKEY}`)
 			.then(({ data }) => {
-				if (!lookUpForState(id)) {
+				if (!lookUpForState(id, characters)) {
 					if (data.name) {
 						setCharacters((oldChars) => [...oldChars, data]);
 					} else {
@@ -95,7 +90,6 @@ function App() {
 	}
 
 	function onClose(id) {
-		// event.preventDefault();
 		const result = characters.filter((character) => {
 			return character.id !== parseInt(id);
 		});
@@ -107,19 +101,11 @@ function App() {
 		setCharacters([...result]);
 	}
 
-	// function onCloseFav(id) {
-	// 	const result2 = favorit.filter((character) => {
-	// 		return character.id !== parseInt(id);
-	// 	});
-	// 	setFavorite([...result2]);
-	// }
-
 	function handlerSetAccess(access) {
 		setAccess(access);
 		nav("/");
 	}
-	//console.log(characters);
-	if (location.pathname === "/") {
+	if (location.pathname === BASE_URL) {
 		return (
 			<div className="App">
 				<Login login={login} acc={access} />
@@ -135,17 +121,19 @@ function App() {
 				acc={access}
 			/>
 			<Routes>
-				{/* <Home characters={characters} onClosed={onClose} /> */}
 				<Route
-					path="/home"
+					path={HOME}
 					element={<Cards characters={characters} onClose={onClose} />}
 				/>
-				<Route path="/" element={<Login login={login} access={access} />} />
-				<Route path="/favorites" element={<Favorites onClose={onClose} />} />
-				<Route path="/about" element={<About />} />
-				<Route path="/detail/:id" element={<Detail />} />
-				<Route path="/error404" element={<Error404 />} />
-				<Route path="*" element={<Error404 />} />
+				<Route
+					path={BASEURL}
+					element={<Login login={login} access={access} />}
+				/>
+				<Route path={FAVORITES} element={<Favorites onClose={onClose} />} />
+				<Route path={ABOUT} element={<About />} />
+				<Route path={DETAILID} element={<Detail />} />
+				<Route path={ERROR404} element={<Error404 />} />
+				<Route path={DEFAULT} element={<Error404 />} />
 			</Routes>
 			<Cards />
 		</div>
