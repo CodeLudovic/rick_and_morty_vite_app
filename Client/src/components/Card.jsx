@@ -9,7 +9,6 @@ export function Card({ onClose, item }) {
 	const [isFav, setIsFav] = useState(false);
 	const dispatch = useDispatch();
 	const myFavorites = useSelector((state) => state.myFavorites);
-
 	/* eslint-disable */
 	useEffect(() => {
 		for (let i = 0; i < myFavorites.length; i++) {
@@ -24,32 +23,28 @@ export function Card({ onClose, item }) {
 		setInputValue(newValue);
 	};
 
-	const handleIsFav = (e) => {
-		e.preventDefault();
-		if (isFav === true) {
-			setIsFav(false);
-			dispatch(removeFav(item.id));
+	function handleFavorite(data) {
+		if (!isFav) {
+			dispatch(addFav(data));
+		} else {
+			dispatch(removeFav(data.id));
 		}
-		if (isFav === false) {
-			setIsFav(true);
-			dispatch(addFav(item));
-		}
-	};
+		setIsFav(!isFav);
+	}
 	return (
 		<div className="card">
 			{isFav ? (
-				<button className="fav-button" onClick={handleIsFav}>
+				<button className="fav-button" onClick={() => handleFavorite(item)}>
 					❤️
 				</button>
 			) : (
-				<button className="fav-button" onClick={handleIsFav}>
+				<button className="fav-button" onClick={() => handleFavorite(item)}>
 					🤍
 				</button>
 			)}
 			<button
 				className="close-button"
-				onClick={(event) => {
-					event.preventDefault();
+				onClick={() => {
 					onClose(item.id);
 				}}>
 				X

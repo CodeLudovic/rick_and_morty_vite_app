@@ -3,17 +3,11 @@ import Card from "./Card";
 
 /* eslint-disable */
 function Cards({ characters, onClose, myFavorites }) {
-	console.log(myFavorites);
 	if (characters !== null && characters !== undefined) {
 		return (
 			<div className="card-list">
-				{characters.map((character, index) => (
-					<Card
-						key={index}
-						item={character}
-						onClose={onClose}
-						characters={characters}
-					/>
+				{characters?.map((character, index) => (
+					<Card key={character.id} item={character} onClose={onClose} />
 				))}
 			</div>
 		);

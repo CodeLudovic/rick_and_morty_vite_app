@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { ADD_FAV, REMOVE_FAV, ORDER, FILTER } from "../type/type";
 
 export const initialState = {
@@ -5,34 +6,32 @@ export const initialState = {
 	allCharacters: [],
 };
 /* eslint-disable */
-export const rootReducer = (state = initialState, action) => {
-	switch (action.type) {
+export const rootReducer = (state = initialState, { type, payload }) => {
+	switch (type) {
 		case ADD_FAV:
 			return {
 				...state,
-				allCharacters: [...state.myFavorites, action.payload],
-				myFavorites: [...state.myFavorites, action.payload],
+				myFavorites: payload,
+				allCharacters: payload,
 			};
-
 		case REMOVE_FAV:
-			const respon = state.myFavorites.filter(
-				(character) => character.id !== parseInt(action.payload)
-			);
-			const respon2 = state.allCharacters.filter(
-				(character) => character.id !== parseInt(action.payload)
-			);
-			return {
-				...state,
-				myFavorites: respon,
-				allCharacters: respon2,
-			};
+			// const respon = state.myFavorites.filter(
+			// 	(character) => character.id !== parseInt(action.payload)
+			// );
+			// const respon2 = state.allCharacters.filter(
+			// 	(character) => character.id !== parseInt(action.payload)
+			// );
+			// return {
+			// 	...state,
+			// 	myFavorites: respon,
+			// 	allCharacters: respon2,
+			// };
+			return { ...state, myFavorites: payload };
 
 		case FILTER:
-			if (action.payload !== "All") {
+			if (payload !== "All") {
 				let copy = [...state.allCharacters];
-				const result = copy.filter(
-					(character) => character.gender === action.payload
-				);
+				const result = copy.filter((character) => character.gender === payload);
 				return {
 					...state,
 					myFavorites: [...result],
@@ -45,7 +44,7 @@ export const rootReducer = (state = initialState, action) => {
 			}
 
 		case ORDER:
-			if (action.payload === "A") {
+			if (payload === "A") {
 				const copy2 = state.myFavorites;
 				const result = copy2.sort((a, b) => a.id - b.id);
 				return {
@@ -54,7 +53,7 @@ export const rootReducer = (state = initialState, action) => {
 				};
 			}
 
-			if (action.payload === "D") {
+			if (payload === "D") {
 				const copy2 = state.myFavorites;
 				const result = copy2.sort((a, b) => b.id - a.id);
 				return {

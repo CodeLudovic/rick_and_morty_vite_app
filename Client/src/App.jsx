@@ -38,12 +38,15 @@ function App() {
 		!access && nav("/");
 	}, [access]);
 
-	function login(userData) {
-		if (userData.email === EMAIL && userData.password === PASS) {
-			setAccess(true);
-			nav("/home");
-		}
-	}
+	const login = (userData) => {
+		const { email, password } = userData;
+		const URL = "http://localhost:3001/rickandmorty/login/";
+		axios(URL + `?email=${email}&password=${password}`).then(({ data }) => {
+			const { access } = data;
+			setAccess(access);
+			access && nav("/home");
+		});
+	};
 
 	function onRandomize(id = 0) {
 		id = Math.floor(Math.random() * 827) + 1;
@@ -93,15 +96,20 @@ function App() {
 	}
 
 	function onClose(id) {
-		const result = characters.filter((character) => {
-			return character.id !== parseInt(id);
+		// console.log(typeof id);
+		// console.log(typeof Number(id));
+		const charsWithOutErased = characters.filter((character) => {
+			// console.log(typeof character.id);
+			return character.id !== id;
 		});
+
 		favs?.map((favo) => {
 			if (favo.id === id) {
 				dispatch(removeFav(id));
 			}
 		});
-		setCharacters([...result]);
+
+		setCharacters(charsWithOutErased);
 	}
 
 	function handlerSetAccess(access) {

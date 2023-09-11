@@ -8,13 +8,12 @@ function Detail() {
 	const [character, setCharacter] = useState({});
 	const nagivate = useNavigate();
 
-	const { id } = useParams(); //
+	const { id } = useParams();
 
 	useEffect(() => {
 		axios(`${BASEURL_LOC}${id}`)
 			.then(({ data }) => {
 				if (data.name) {
-					//console.log(origin);
 					setCharacter(data);
 				} else {
 					window.alert("No hay personajes con ese ID");
@@ -37,9 +36,7 @@ function Detail() {
 					{character.species && <p>Species | {character.species}</p>}
 					{character.gender && <p>Gender | {character.gender}</p>}
 					{character.origin && (
-						<p style={{ marginTop: "-5px" }}>
-							Origin | {character.origin.name}
-						</p>
+						<p style={{ marginTop: "-5px" }}>Origin | {character.origin}</p>
 					)}
 				</div>
 			) : (
