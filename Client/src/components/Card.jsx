@@ -9,14 +9,24 @@ export function Card({ onClose, item }) {
 	const [isFav, setIsFav] = useState(false);
 	const dispatch = useDispatch();
 	const myFavorites = useSelector((state) => state.myFavorites);
+
+	const [closeBtn, setCloseBtn] = useState(true);
+
 	/* eslint-disable */
+
+	useEffect(() => {
+		if (!onClose) {
+			setCloseBtn(false);
+		}
+	}, []);
+
 	useEffect(() => {
 		for (let i = 0; i < myFavorites.length; i++) {
 			if (myFavorites[i].id === item.id) {
 				setIsFav(true);
 			}
 		}
-	}, [myFavorites, item]);
+	}, [myFavorites]);
 
 	const handleInputChange = (event) => {
 		const newValue = event.target.value;
@@ -27,14 +37,14 @@ export function Card({ onClose, item }) {
 		if (!isFav) {
 			dispatch(addFav(data));
 		} else {
-			dispatch(removeFav(data.id));
+			dispatch(removeFav(data));
 		}
 		setIsFav(!isFav);
 	}
 	return (
 		<div className="card">
 			{isFav ? (
-				<button className="fav-button" onClick={() => handleFavorite(item)}>
+				<button className="fav-button" onClick={() => handleFavorite(item.id)}>
 					❤️
 				</button>
 			) : (
@@ -42,13 +52,16 @@ export function Card({ onClose, item }) {
 					🤍
 				</button>
 			)}
-			<button
-				className="close-button"
-				onClick={() => {
-					onClose(item.id);
-				}}>
-				X
-			</button>
+			{closeBtn && (
+				<button
+					className="close-button"
+					onClick={() => {
+						onClose(item.id);
+					}}>
+					X
+				</button>
+			)}
+
 			<div className="image-container">
 				<img src={item.image} alt="" />
 			</div>

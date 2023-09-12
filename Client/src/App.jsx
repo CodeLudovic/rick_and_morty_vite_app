@@ -38,14 +38,19 @@ function App() {
 		!access && nav("/");
 	}, [access]);
 
-	const login = (userData) => {
-		const { email, password } = userData;
-		const URL = "http://localhost:3001/rickandmorty/login/";
-		axios(URL + `?email=${email}&password=${password}`).then(({ data }) => {
+	const login = async (userData) => {
+		try {
+			const { email, password } = userData;
+			const URL = "http://localhost:3001/rickandmorty/login/";
+			const { data } = await axios(
+				URL + `?email=${email}&password=${password}`
+			);
 			const { access } = data;
 			setAccess(access);
 			access && nav("/home");
-		});
+		} catch (error) {
+			console.log(error);
+		}
 	};
 
 	function onRandomize(id = 0) {
@@ -61,7 +66,7 @@ function App() {
 						window.alert("¡No hay personajes con este ID!");
 					}
 				} else {
-					window.alert("El personaje ya se encuentra en la vista!");
+					window.alert("¡Este personaje ya se encuentra en la vista!");
 				}
 			})
 			.catch((error) => {
@@ -72,42 +77,34 @@ function App() {
 				}
 			});
 	}
-	function onSearch(id) {
-		// axios(`${BASEURL}${id}${APIKEY}`)
-		axios(`${BASEURL_LOC}${id}`)
-			.then(({ data }) => {
-				if (!lookUpForState(id, characters)) {
-					if (data.name) {
-						setCharacters((oldChars) => [...oldChars, data]);
-					} else {
-						window.alert("¡No hay personajes con este ID!");
-					}
+	async function onSearch(id) {
+		// axios(`${BASEURL}${id}${APIKEY}`) //Rick and Morty Api Henry
+		try {
+			const { data } = await axios(`${BASEURL_LOC}${id}`);
+			if (!lookUpForState(id, characters)) {
+				if (data.name) {
+					setCharacters((oldChars) => [...oldChars, data]);
 				} else {
-					window.alert("El personaje ya se encuentra en la vista!");
-				}
-			})
-			.catch((error) => {
-				if (error.response && error.response.status === 404) {
 					window.alert("¡No hay personajes con este ID!");
-				} else {
-					window.alert("Ocurrio un error al buscar el personaje");
 				}
-			});
+			} else {
+				window.alert("¡Este personaje ya se encuentra en la vista!");
+			}
+		} catch (error) {
+			if (error.response && error.response.status === 404) {
+				window.alert("¡No hay personajes con este ID!");
+			} else {
+				window.alert("Ocurrio un error al buscar el personaje");
+			}
+		}
 	}
 
 	function onClose(id) {
-		// console.log(typeof id);
-		// console.log(typeof Number(id));
 		const charsWithOutErased = characters.filter((character) => {
-			// console.log(typeof character.id);
 			return character.id !== id;
 		});
 
-		favs?.map((favo) => {
-			if (favo.id === id) {
-				dispatch(removeFav(id));
-			}
-		});
+		dispatch(removeFav(id));
 
 		setCharacters(charsWithOutErased);
 	}

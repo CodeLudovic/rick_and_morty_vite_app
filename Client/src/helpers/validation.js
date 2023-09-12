@@ -22,7 +22,7 @@ export function validate(userData) {
 export function lookUpForState(id, characters) {
 	let bool = false;
 	for (let i = 0; i < characters.length; i++) {
-		if (characters[i].id === parseInt(id)) {
+		if (characters[i].id === id) {
 			bool = true;
 		}
 	}

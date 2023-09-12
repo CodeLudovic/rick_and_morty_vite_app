@@ -1,5 +1,5 @@
 /* eslint-disable */
-import { ADD_FAV, REMOVE_FAV, ORDER, FILTER } from "../type/type";
+import { ADD_FAV, REMOVE_FAV, ORDER, FILTER, RESET } from "../type/type";
 
 export const initialState = {
 	myFavorites: [],
@@ -29,19 +29,18 @@ export const rootReducer = (state = initialState, { type, payload }) => {
 			return { ...state, myFavorites: payload };
 
 		case FILTER:
-			if (payload !== "All") {
-				let copy = [...state.allCharacters];
-				const result = copy.filter((character) => character.gender === payload);
-				return {
-					...state,
-					myFavorites: [...result],
-				};
-			} else {
-				return {
-					...state,
-					myFavorites: [...state.allCharacters],
-				};
-			}
+			return {
+				...state,
+				myFavorites: state.allCharacters.filter(
+					(character) => character.gender === payload
+				),
+			};
+
+		case RESET:
+			return {
+				...state,
+				myFavorites: [...state.allCharacters],
+			};
 
 		case ORDER:
 			if (payload === "A") {
@@ -62,6 +61,6 @@ export const rootReducer = (state = initialState, { type, payload }) => {
 				};
 			}
 		default:
-			return { ...state };
+			return { ...state, myFavorites: state.allCharacters };
 	}
 };
