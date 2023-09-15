@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { addFav, removeFav } from "../redux/actions/actions";
 import { MAXLENGTH } from "../helpers/data";
+import style from "./Card.Module.css";
+import { motion } from "framer-motion";
 
 export function Card({ onClose, item }) {
 	const [inputValue, setInputValue] = useState("");
@@ -41,45 +43,58 @@ export function Card({ onClose, item }) {
 		}
 		setIsFav(!isFav);
 	}
-	return (
-		<div className="card">
-			{isFav ? (
-				<button className="fav-button" onClick={() => handleFavorite(item.id)}>
-					❤️
-				</button>
-			) : (
-				<button className="fav-button" onClick={() => handleFavorite(item)}>
-					🤍
-				</button>
-			)}
-			{closeBtn && (
-				<button
-					className="close-button"
-					onClick={() => {
-						onClose(item.id);
-					}}>
-					X
-				</button>
-			)}
 
-			<div className="image-container">
+	return (
+		<motion.div
+			animate={{ x: 20 }}
+			transition={{ type: "spring", bounce: 0.3 }}
+			className={style.component}>
+			<div className={style.buttons}>
+				{isFav ? (
+					<button
+						className={style.fav_button}
+						onClick={() => handleFavorite(item.id)}>
+						❤️
+					</button>
+				) : (
+					<button
+						className={style.fav_button}
+						onClick={() => handleFavorite(item)}>
+						🤍
+					</button>
+				)}
+				<div className={style.id}>ID: {item.id}</div>
+				{closeBtn && (
+					<button
+						className={style.close_button}
+						onClick={() => {
+							onClose(item.id);
+						}}>
+						❌
+					</button>
+				)}
+			</div>
+			<div className={style.image}>
 				<img src={item.image} alt="" />
 			</div>
-			<div
-				className={`image-text ${
-					item.name.length > MAXLENGTH ? "expanded" : ""
-				}`}
-				onChange={handleInputChange}
-				value={inputValue}>
-				<NavLink to={`/detail/${item.id}`} className="link-cards">
-					{item.name}
-				</NavLink>
+			<div className={style.name}>
+				<div
+					className={`${style.image_text} ${
+						item.name.length > MAXLENGTH ? "expanded" : ""
+					}`}
+					onChange={handleInputChange}
+					value={inputValue}>
+					<NavLink to={`/detail/${item.id}`} className="link-cards">
+						{item.name}
+					</NavLink>
+				</div>
 			</div>
-			<div className="footer">
-				<div className="left-content">{item.species}</div>
-				<div className="right-content">{item.gender}</div>
+			<div className={style.footer}>
+				<div className={style.text_separator}>{item.status}</div>
+				<div className={style.separator}></div>
+				<div>{item.gender}</div>
 			</div>
-		</div>
+		</motion.div>
 	);
 }
 

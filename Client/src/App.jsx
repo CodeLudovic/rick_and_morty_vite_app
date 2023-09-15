@@ -1,21 +1,21 @@
 /* eslint-disable */
-import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { removeFav } from "./redux/actions/actions";
 import axios from "axios";
 
-import "./App.css";
 import About from "./components/About/About";
 import Detail from "./components/Detail/Detail";
 import NavBar from "./components/NavBar/NavBar";
 import Cards from "./components/Cards";
 import Error404 from "./components/error404/Error404";
-import Login from "./components/Login/Login";
 import Favorites from "./components/Favorites/Favorites";
 import { lookUpForState } from "./helpers/validation";
-import { BASEURL, BASEURL_LOC, APIKEY, EMAIL, PASS } from "./helpers/data";
-// dsd
+import { BASEURL_LOC } from "./helpers/data";
+
+import style from "./App.module.css";
+
 import {
 	DETAILID,
 	FAVORITES,
@@ -25,14 +25,14 @@ import {
 	ERROR404,
 	HOME,
 } from "./helpers/routing";
+import { LadingPage } from "./views/LandingPage/LadingPage";
+import { OrderBar } from "./components/OrderBar/OrderBar";
 
 function App() {
-	const location = useLocation();
 	const nav = useNavigate();
 	const dispatch = useDispatch();
 	const [characters, setCharacters] = useState([]);
 	const [access, setAccess] = useState(false);
-	const favs = useSelector((state) => state.myFavorites);
 
 	useEffect(() => {
 		!access && nav("/");
@@ -46,8 +46,10 @@ function App() {
 				URL + `?email=${email}&password=${password}`
 			);
 			const { access } = data;
-			setAccess(access);
-			access && nav("/home");
+			if (access) {
+				setAccess(access);
+				access && nav("/home");
+			}
 		} catch (error) {
 			console.log(error);
 		}
@@ -98,7 +100,6 @@ function App() {
 			}
 		}
 	}
-
 	function onClose(id) {
 		const charsWithOutErased = characters.filter((character) => {
 			return character.id !== id;
@@ -113,37 +114,115 @@ function App() {
 		setAccess(access);
 		nav("/");
 	}
-	if (location.pathname === BASE_URL) {
-		return (
-			<div className="App">
-				<Login login={login} acc={access} />
-			</div>
-		);
-	}
+	// if (location.pathname === BASE_URL) {
+	// 	return (
+	// 		<div className="App">
+	// 			<Login login={login} acc={access} />
+	// 		</div>
+	// 	);
+	// }
 	return (
-		<div className="App">
-			<NavBar
-				onSearch={onSearch}
-				onRandomize={onRandomize}
-				access={handlerSetAccess}
-				acc={access}
-			/>
+		<div className={style.App}>
 			<Routes>
 				<Route
-					path={HOME}
-					element={<Cards characters={characters} onClose={onClose} />}
+					path={BASE_URL}
+					element={
+						<>
+							<LadingPage login={login} />
+						</>
+					}
 				/>
 				<Route
-					path={BASEURL}
-					element={<Login login={login} access={access} />}
+					path="/home"
+					element={
+						access ? (
+							<>
+								<NavBar
+									onSearch={onSearch}
+									onRandomize={onRandomize}
+									access={handlerSetAccess}
+									acc={access}
+								/>
+								<Cards characters={characters} onClose={onClose} />
+								{/*Footer pendiente*/}
+							</>
+						) : (
+							<Navigate to="/" replace />
+						)
+					}
+				/>
+				<Route
+					path={ABOUT}
+					element={
+						access ? (
+							<>
+								<NavBar
+									onSearch={onSearch}
+									onRandomize={onRandomize}
+									access={handlerSetAccess}
+									acc={access}
+								/>
+								<About />
+								{/*Footer pendiente*/}
+							</>
+						) : (
+							<Navigate to="/" replace />
+						)
+					}
+				/>
+				<Route
+					path={FAVORITES}
+					element={
+						access ? (
+							<>
+								<NavBar
+									onSearch={onSearch}
+									onRandomize={onRandomize}
+									access={handlerSetAccess}
+									acc={access}
+								/>
+								<OrderBar />
+								<Favorites onClose={onClose} />
+								{/*Footer pendiente*/}
+							</>
+						) : (
+							<Navigate to="/" replace />
+						)
+					}
+				/>
+				<Route
+					path={DETAILID}
+					element={
+						access ? (
+							<>
+								<NavBar
+									onSearch={onSearch}
+									onRandomize={onRandomize}
+									access={handlerSetAccess}
+									acc={access}
+								/>
+								<Detail />
+								{/*Footer pendiente*/}
+							</>
+						) : (
+							<Navigate to="/" replace />
+						)
+					}
+				/>
+				<Route path={ERROR404} element={<Error404 />} />
+				<Route path={DEFAULT} element={<Error404 />} />
+
+				{/* <Route
+					path={HOME}
+					element={<Cards characters={characters} onClose={onClose} />}
 				/>
 				<Route path={FAVORITES} element={<Favorites onClose={onClose} />} />
 				<Route path={ABOUT} element={<About />} />
 				<Route path={DETAILID} element={<Detail />} />
 				<Route path={ERROR404} element={<Error404 />} />
 				<Route path={DEFAULT} element={<Error404 />} />
+				<Cards /> */}
 			</Routes>
-			<Cards />
 		</div>
 	);
 }

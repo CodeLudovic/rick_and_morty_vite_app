@@ -1,7 +1,8 @@
-import { useState } from "react";
-import myImage from "../../assets/img/rick-and-morty-6344804_1280.png";
+import { useEffect, useState } from "react";
 import { validate } from "../../helpers/validation";
-import "../../App.css";
+import style from "./Login.module.css";
+import useSound from "use-sound";
+import soundFile from "../../assets/rickandmorty.mp3";
 /* eslint-disable */
 function Login({ login }) {
 	const [errors, setErrors] = useState({});
@@ -9,6 +10,15 @@ function Login({ login }) {
 		email: "",
 		password: "",
 	});
+
+	const [play, { stop }] = useSound(soundFile);
+
+	useEffect(() => {
+		play();
+		return () => {
+			stop();
+		};
+	}, [play]);
 
 	function handleChange(event) {
 		setUserData({
@@ -25,36 +35,52 @@ function Login({ login }) {
 		event.preventDefault();
 		login(userData);
 	}
+
+	// useEffect(() => {
+	// 	// Función para reproducir el sonido
+	// 	const audio = new Audio(soundFile);
+	// 	if (!audio.play()) {
+	// 		audio.stop();
+	// 	} else audio.play();
+	// }, []);
+
 	return (
-		<div className="login-container">
-			<form className="form-login" onSubmit={handleSubmit}>
-				<img className="form-image" src={myImage}></img>
-				<label className="form-email-label">EMAIL</label>
-				<input
-					placeholder="Email..."
-					type="email"
-					name="email"
-					value={userData.name}
-					className="form-inputs"
-					onChange={handleChange}
-				/>
-				{<span className="form-danger">{errors.email}</span>}
-				<label style={{ paddingTop: "10px" }}>PASSWORD</label>
-				<input
-					type="password"
-					name="password"
-					className="form-inputs"
-					value={userData.password}
-					onChange={handleChange}
-				/>
-				{<span className="form-danger">{errors.password}</span>}
-				{Object.keys(errors).length === 0 && (
-					<button type="submit" className="form-button">
-						Submit
-					</button>
-				)}
-			</form>
-		</div>
+		<>
+			<div className={style.container}>
+				<h2>Inicia sesión</h2>
+				<form onSubmit={handleSubmit} name="loginForm">
+					<div className={style.email}>
+						<input
+							type="email"
+							placeholder="Email"
+							name="email"
+							value={userData.email}
+							onChange={handleChange}
+						/>
+						{errors.email && <h5 className={style.error}>{errors.email}</h5>}
+					</div>
+					<div className={style.password}>
+						<input
+							type="password"
+							placeholder="Password"
+							name="password"
+							value={userData.password}
+							onChange={handleChange}
+						/>
+						{errors.password && (
+							<h5 className={style.error}>{errors.password}</h5>
+						)}
+					</div>
+					<div>
+						{Object.keys(errors).length === 0 && (
+							<button type="submit" className={style.submit}>
+								Submit
+							</button>
+						)}
+					</div>
+				</form>
+			</div>
+		</>
 	);
 }
 

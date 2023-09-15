@@ -1,15 +1,31 @@
 let myFavorites = [];
 
 const postFav = (req, res) => {
-	const character = req.body;
-	myFavorites.push(character);
-	return res.status(200).json(myFavorites);
+	try {
+		const character = req.body;
+
+		if (!character.name || !character.gender)
+			throw new Error("Algo salio mal verifica el ID");
+
+		myFavorites.push(character);
+		res.status(200).json(myFavorites);
+	} catch (error) {
+		res.status(400).json({ error: error });
+	}
 };
 
 const deleteFav = (req, res) => {
-	const { id } = req.params;
-	myFavorites = myFavorites.filter((favorite) => favorite.id !== id);
-	return res.status(200).json(myFavorites);
+	try {
+		const { id } = req.params;
+
+		if (myFavorites.length < 0)
+			throw new Error("Algo salio mal verifica el ID");
+
+		myFavorites = myFavorites.filter((favorite) => favorite.id !== id);
+		res.status(200).json(myFavorites);
+	} catch (error) {
+		res.status(400).json({ error: error });
+	}
 };
 
 module.exports = {

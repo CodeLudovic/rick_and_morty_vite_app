@@ -1,0 +1,133 @@
+.gridButtons{
+   display: grid;
+   grid-template-columns: 1fr 1fr;
+   justify-items: center;
+   align-items: center;
+}
+
+.button_home{
+   margin-right: 10px;
+   width: 108px;
+   height: 40px;
+   border: 0px;
+   border-radius: 10px;
+   background: #ffff61;
+   /* font-family: 'get schwifty', sans-serif;
+   font-size: 14px; */
+   font-family: Arcade Gamer;
+   font-size: 17px;
+}
+
+/* .active {
+   background-color: brown;
+   font-weight: bold;
+   text-decoration: none;
+ }
+ .disable {
+   background-color: #f6f4e6;
+   text-decoration: none;
+ } */
+
+.button_home:hover{
+   transform: scale(1.05);
+   display: inline-block;
+   box-shadow: 
+   0 0 10px cyan,  
+   0 0 20px magenta;
+   border: 1px black solid;
+   cursor: pointer;
+}
+
+.button_about{
+   margin-right: 10px;
+   width: 108px;
+   height: 40px;
+   border: 0px;
+   border-radius: 10px;
+   background: #ffff61;
+   /* font-family: 'get schwifty', sans-serif;
+   font-size: 14px; */
+   font-family: Arcade Gamer;
+   font-size: 17px;
+}
+
+.button_about:hover{
+   transform: scale(1.05);
+   display: inline-block;
+   box-shadow: 
+   0 0 10px cyan,  
+   0 0 20px magenta;
+   cursor: pointer;
+   border: 1px #434343 solid;
+}
+
+.button_favorite{
+   /* margin-right: 20px; */
+   width: 108px;
+   height: 40px;
+   border: 0px;
+   border-radius: 10px;
+   background: #ffff61;
+   /* font-family: 'get schwifty', sans-serif;
+   font-size: 14px; */
+   font-family: Arcade Gamer;
+   font-size: 17px;
+}
+
+.button_favorite:hover{
+   transform: scale(1.05);
+   display: inline-block;
+   box-shadow: 
+   0 0 10px cyan,  
+   0 0 20px magenta;
+   cursor: pointer;
+   border: 1px #434343 solid;
+}
+
+.button_random{
+   margin-right: 20px;
+   width: 40px;
+   height: 40px;
+   border: 0px;
+   border-radius: 10px;
+   background: #ffff61;
+   /* font-family: 'get schwifty', sans-serif;
+   font-size: 14px; */
+   font-family: Arcade Gamer;
+   font-size: 24px;
+   justify-content: center;
+}
+
+.button_random:hover{
+   transform: scale(1.05);
+   box-shadow: 
+   0 0 10px cyan,  
+   0 0 20px magenta;
+   cursor: pointer;
+   border: 1px #434343 solid;
+}
+
+.button_logout{
+   width: 108px;
+   height: 40px;
+   border: 0px;
+   border-radius: 10px;
+   background: #e77272;
+   /* font-family: 'get schwifty', sans-serif;
+   font-size: 14px; */
+   font-family: Arcade Gamer;
+   font-size: 17px;
+}
+
+.button_logout:hover{
+   transform: scale(1.05);
+   box-shadow: 
+   0 0 10px cyan,  
+   0 0 20px magenta;
+   cursor: pointer;
+   border: 1px #434343 solid;
+}
+
+@media screen {
+   /* 1er Breakpoint 1380px */
+}

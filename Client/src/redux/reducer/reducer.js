@@ -26,7 +26,11 @@ export const rootReducer = (state = initialState, { type, payload }) => {
 			// 	myFavorites: respon,
 			// 	allCharacters: respon2,
 			// };
-			return { ...state, myFavorites: payload };
+			return {
+				...state,
+				myFavorites: payload,
+				allCharacters: payload,
+			};
 
 		case FILTER:
 			return {
