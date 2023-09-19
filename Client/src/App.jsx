@@ -1,6 +1,6 @@
 /* eslint-disable */
 import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { removeFav } from "./redux/actions/actions";
 import axios from "axios";
@@ -32,7 +32,16 @@ function App() {
 	const nav = useNavigate();
 	const dispatch = useDispatch();
 	const [characters, setCharacters] = useState([]);
-	const [access, setAccess] = useState(false);
+	const [access, setAccess] = useState(true);
+	const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+	const toggleMenu = () => {
+		setIsMenuOpen(!isMenuOpen);
+	};
+
+	const closeMenu = () => {
+		setIsMenuOpen(false);
+	};
 
 	useEffect(() => {
 		!access && nav("/");
@@ -48,7 +57,7 @@ function App() {
 			const { access } = data;
 			if (access) {
 				setAccess(access);
-				access && nav("/home");
+				nav("/home");
 			}
 		} catch (error) {
 			console.log(error);
@@ -114,13 +123,6 @@ function App() {
 		setAccess(access);
 		nav("/");
 	}
-	// if (location.pathname === BASE_URL) {
-	// 	return (
-	// 		<div className="App">
-	// 			<Login login={login} acc={access} />
-	// 		</div>
-	// 	);
-	// }
 	return (
 		<div className={style.App}>
 			<Routes>
@@ -138,16 +140,19 @@ function App() {
 						access ? (
 							<>
 								<NavBar
+									closeMenu={closeMenu}
 									onSearch={onSearch}
 									onRandomize={onRandomize}
 									access={handlerSetAccess}
 									acc={access}
+									isOpenFn={setIsMenuOpen}
+									isOpenMenu={isMenuOpen}
 								/>
 								<Cards characters={characters} onClose={onClose} />
 								{/*Footer pendiente*/}
 							</>
 						) : (
-							<Navigate to="/" replace />
+							<Navigate to="/" />
 						)
 					}
 				/>
@@ -157,16 +162,19 @@ function App() {
 						access ? (
 							<>
 								<NavBar
+									closeMenu={closeMenu}
 									onSearch={onSearch}
 									onRandomize={onRandomize}
 									access={handlerSetAccess}
 									acc={access}
+									isOpenFn={setIsMenuOpen}
+									isOpenMenu={isMenuOpen}
 								/>
 								<About />
 								{/*Footer pendiente*/}
 							</>
 						) : (
-							<Navigate to="/" replace />
+							<Navigate to="/" />
 						)
 					}
 				/>
@@ -176,17 +184,20 @@ function App() {
 						access ? (
 							<>
 								<NavBar
+									closeMenu={closeMenu}
 									onSearch={onSearch}
 									onRandomize={onRandomize}
 									access={handlerSetAccess}
 									acc={access}
+									isOpenFn={setIsMenuOpen}
+									isOpenMenu={isMenuOpen}
 								/>
 								<OrderBar />
 								<Favorites onClose={onClose} />
 								{/*Footer pendiente*/}
 							</>
 						) : (
-							<Navigate to="/" replace />
+							<Navigate to="/" />
 						)
 					}
 				/>
@@ -196,21 +207,25 @@ function App() {
 						access ? (
 							<>
 								<NavBar
+									closeMenu={closeMenu}
 									onSearch={onSearch}
 									onRandomize={onRandomize}
 									access={handlerSetAccess}
 									acc={access}
+									isOpenFn={setIsMenuOpen}
+									isOpenMenu={isMenuOpen}
 								/>
 								<Detail />
 								{/*Footer pendiente*/}
 							</>
 						) : (
-							<Navigate to="/" replace />
+							<Navigate to="/" />
 						)
 					}
 				/>
+
 				<Route path={ERROR404} element={<Error404 />} />
-				<Route path={DEFAULT} element={<Error404 />} />
+				<Route path="*" element={<Error404 />} />
 
 				{/* <Route
 					path={HOME}

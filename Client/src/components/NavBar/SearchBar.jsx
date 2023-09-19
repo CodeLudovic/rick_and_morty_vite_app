@@ -11,7 +11,7 @@ export default function SearchBar({ onSearch, onRandomize }) {
 		<div className={style.search_bar}>
 			<div>
 				<input
-					placeholder="id."
+					placeholder="Search ID..."
 					className={style.input_nav}
 					type="search"
 					id="inp"

@@ -1,24 +1,39 @@
 import { NavLink } from "react-router-dom";
 import { ABOUT, FAVORITES, HOME } from "../../helpers/routing";
 import style from "./ButtonsNav.module.css";
-export const ButtonsNav = ({ acc, onLogOut }) => {
+export const ButtonsNav = ({
+	onLogOut,
+	isOpenFn,
+	isOpenState,
+	setMenuOpen,
+}) => {
 	return (
 		<>
 			<div className={style.gridButtons}>
-				{acc && (
+				<div className={style.buttons___grid}>
 					<button className={style.button_logout} onClick={onLogOut}>
 						Log Out
 					</button>
-				)}
-				<div>
-					<NavLink to={HOME}>
-						<button className={style.button_home}>Home</button>
+					<NavLink to={FAVORITES}>
+						<button
+							onClick={() => isOpenFn(!isOpenState)}
+							className={style.button_favorite}>
+							Favorites
+						</button>
 					</NavLink>
 					<NavLink to={ABOUT}>
-						<button className={style.button_about}>About</button>
+						<button
+							onClick={() => isOpenFn(!isOpenState)}
+							className={style.button_about}>
+							About
+						</button>
 					</NavLink>
-					<NavLink to={FAVORITES}>
-						<button className={style.button_favorite}>Favorites</button>
+					<NavLink to={HOME}>
+						<button
+							onClick={() => isOpenFn(!isOpenState)}
+							className={style.button_home}>
+							Home
+						</button>
 					</NavLink>
 				</div>
 			</div>
