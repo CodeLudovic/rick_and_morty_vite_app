@@ -1,23 +1,18 @@
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import Card from "./Card";
 import style from "./Cards.module.css";
 /* eslint-disable */
-function Cards({ characters, onClose, myFavorites }) {
+function Cards({ characters, onClose }) {
 	if (characters !== null && characters !== undefined) {
+		console.log(characters);
+		const myFavorites = useSelector((state) => state.myFavorites);
 		return (
 			<div className={style.container}>
-				{characters?.map((character, index) => (
+				{characters?.map((character) => (
 					<Card key={character.id} item={character} onClose={onClose} />
 				))}
 			</div>
 		);
 	}
 }
-
-export function mapStateToProps(state) {
-	return {
-		myFavorites: state.myFavorites,
-	};
-}
-
-export default connect(mapStateToProps, null)(Cards);
+export default Cards;

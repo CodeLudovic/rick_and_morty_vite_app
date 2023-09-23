@@ -32,7 +32,7 @@ function App() {
 	const nav = useNavigate();
 	const dispatch = useDispatch();
 	const [characters, setCharacters] = useState([]);
-	const [access, setAccess] = useState(true);
+	const [access, setAccess] = useState(false);
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
 
 	const toggleMenu = () => {

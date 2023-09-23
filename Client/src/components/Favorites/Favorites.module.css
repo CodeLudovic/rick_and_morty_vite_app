@@ -1,3 +1,26 @@
+.container::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-image: url(../assets/RickAndMortySpace.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  
+}
+.container {
+  display: grid;
+  justify-self: center;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  justify-items: center;
+  gap: 40px;
+  margin-top: 60px; 
+  z-index: 1;
+}
+
 .orderBar {
     display: grid;
     position: static;

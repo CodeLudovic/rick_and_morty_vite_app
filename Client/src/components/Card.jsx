@@ -11,7 +11,7 @@ export function Card({ onClose, item }) {
 	const [isFav, setIsFav] = useState(false);
 	const dispatch = useDispatch();
 	const myFavorites = useSelector((state) => state.myFavorites);
-
+	console.log(myFavorites);
 	const [closeBtn, setCloseBtn] = useState(true);
 
 	/* eslint-disable */
